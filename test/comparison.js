@@ -2,7 +2,7 @@
 
 var async = require('async');
 var ES6Map = require('es6-map');
-var HashMap = require('../es6-map');
+var HashMap = require('..');//require('../es6-map');
 
 var measureTime = function (name, test_func, callback) {
     var start_ms = Date.now();
@@ -110,7 +110,7 @@ var hashInsert = function (count, callback) {
 
     var i;
     for (i = 0; i < count; i++) {
-        map.set('key' + i, 'value' + i);
+        map.put('key' + i, 'value' + i);
     }
     return callback();
 };
@@ -120,14 +120,14 @@ var hashInsertAndRemove = function (count, callback) {
 
     var i;
     for (i = 0; i < 500; i++) {
-        map.set('key' + i, 'persistent_value' + i);
+        map.put('key' + i, 'persistent_value' + i);
     }
     for (i = 0; i < count; i++) {
-        map.set('key' + i, 'value' + i);
+        map.put('key' + i, 'value' + i);
     }
     for (i = 0; i < count; i++) {
-        map.delete('key' + i);
-        map.set('key' + (count + i), 'value' + i);
+        map.remove('key' + i);
+        map.put('key' + (count + i), 'value' + i);
     }
     return callback();
 };
@@ -138,7 +138,7 @@ var hashInsertAndFind = function (count, callback) {
     var i;
     var x;
     for (i = 0; i < count; i++) {
-        map.set('key' + i, 'value' + i);
+        map.put('key' + i, 'value' + i);
     }
     for (i = 0; i < count; i++) {
         x = map.get('key0');
